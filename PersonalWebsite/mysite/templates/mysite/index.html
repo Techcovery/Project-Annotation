@@ -1,0 +1,291 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <!-- Latest compiled and minified CSS -->
+
+<!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>Working</title>
+</head>
+<style>.wrapper {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+.image-gallery {
+  margin: 0 auto;
+  display: table;
+  position: relative;
+}
+
+.primary,
+.thumbnails {
+  display: table-cell;
+}
+
+.thumbnails {
+  width: 300px;
+
+}
+
+.primary {
+  width: 600px;
+  height: auto;
+  background-size: contain;
+  background-position: top;
+  background-repeat: no-repeat;
+
+}
+
+.image_title{position: absolute;left: 0;right: 0;top: 30px;text-align: center;width: auto;z-index:1}
+.thumbnail:hover .thumbnail-image, .selected .thumbnail-image {
+  border: 4px solid red;
+}
+
+.thumbnail-image {
+  width: 100px;
+  height: 140px;
+  margin: 20px auto;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  border: 4px solid transparent;
+}
+
+canvas {
+  cursor: crosshair;
+  border: 1px solid #000;
+  position: absolute;
+  top: 0px;
+  left: 410px;
+  right: 0;
+  margin: 0 auto;
+}
+
+
+
+</style>
+  <body>
+    <div class="container">
+    <div class="image_title"> </div>
+
+      <div class="image-gallery">
+
+       <canvas id="canvas" width="600" height="900"></canvas>
+    <div id="output"></div>
+  <aside class="thumbnails">
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel1.jpg' %}" data-title="first image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel1.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel2.jpg' %}" data-title="second image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel2.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel3.jpg' %}" data-title="third image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel3.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel4.jpg' %}" data-title="fourth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel4.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel5.jpg' %}" data-title="fifth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel5.jpg' %}'")></div>
+    </a>
+    <!--<a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel6.jpg' %}" data-title="sixth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel6.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel7.jpg' %}" data-title="seventh image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel7.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel8.jpg' %}" data-title="eigth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel8.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel9.jpg' %}" data-title="nineth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel9.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel10.jpg' %}" data-title="tenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel10.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel11.jpg' %}" data-title="eleventh image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel11.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel12.jpg' %}" data-title="twelth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel12.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel13.jpg' %}" data-title="thirteen image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel13.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel14.jpg' %}" data-title="fourteenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel14.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel15.jpg' %}" data-title="fifteenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel15.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel16.jpg' %}" data-title="sixteenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel16.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel17.jpg' %}" data-title="seventeenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel17.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel18.jpg' %}" data-title="eighteenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel18.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel19.jpg' %}" data-title="nineteenth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel19.jpg' %}'")></div>
+    </a>
+    <a href="#" class="selected thumbnail" data-big="{% static 'mysite/images/apparel20.jpg' %}" data-title="twentieth image">
+      <div class="thumbnail-image" style="background-image: url('{% static 'mysite/images/apparel20.jpg' %}'")></div>
+    </a>
+-->
+
+
+
+
+  </aside>
+
+  <main class="primary" style="background-image: url('{% static 'mysite/images/img1.jpg' %}'); ">
+    </main>
+
+</div>
+    </div>
+
+  </body>
+<script>
+$('.thumbnail').on('click', function() {
+
+
+  var clicked = $(this);
+  var newSelection = clicked.data('big');
+
+  var title = clicked.data('title');
+  $('.image_title').html("This is "+title);
+
+  var $img = $('.primary').css("background-image","url(" + newSelection + ")");
+  clicked.parent().find('.thumbnail').removeClass('selected');
+  clicked.addClass('selected');
+  $('.primary').empty().append($img.hide().fadeIn('slow'));
+});
+
+{#//Canvas#}
+{#var canvas = document.getElementById('canvas');#}
+{#var ctx = canvas.getContext('2d');#}
+{#//Variables#}
+{#var canvasx = $(canvas).offset().left;#}
+{#var canvasy = $(canvas).offset().top;#}
+{#var last_mousex = last_mousey = 0;#}
+{#var mousex = mousey = 0;#}
+{#var mousedown = false;#}
+{##}
+{#//Mousedown#}
+{#$(canvas).on('mousedown', function(e) {#}
+{#  last_mousex = parseInt(e.clientX - canvasx);#}
+{#  last_mousey = parseInt(e.clientY - canvasy);#}
+{#  mousedown = true;#}
+{#});#}
+{##}
+{#//Mouseup#}
+{#$(canvas).on('mouseup', function(e) {#}
+{#  mousedown = false;#}
+{#});#}
+{##}
+{#//Mousemove#}
+{#$(canvas).on('mousemove', function(e) {#}
+{#  mousex = parseInt(e.clientX - canvasx);#}
+{#  mousey = parseInt(e.clientY - canvasy);#}
+{#  if (mousedown) {#}
+{#    ctx.clearRect(0, 0, canvas.width, canvas.height); //clear canvas#}
+{#    ctx.beginPath();#}
+{#    var width = mousex - last_mousex;#}
+{#    var height = mousey - last_mousey;#}
+{#    ctx.rect(last_mousex, last_mousey, width, height);#}
+{#    ctx.strokeStyle = 'black';#}
+{#    ctx.lineWidth = 10;#}
+{#    ctx.stroke();#}
+{#  }#}
+{#  //Output#}
+{#  $('#output').html('current: ' + mousex + ', ' + mousey + '<br/>last: ' + last_mousex + ', ' + last_mousey + '<br/>mousedown: ' + mousedown);#}
+{#});#}
+
+
+{#var canvas = document.getElementById('canvas');#}
+{#var ctx = canvas.getContext('2d');#}
+{#var rect = {};#}
+{#var drag = false;#}
+{#var imageObj = null;#}
+{##}
+{#function init() {#}
+{#    imageObj = new Image();#}
+{#    imageObj.onload = function () { ctx.drawImage(imageObj, 0, 0); };#}
+    {#imageObj.src = '{% static 'mysite/images/img1.jpg' %}';#}
+{#    canvas.addEventListener('mousedown', mouseDown, false);#}
+{#    canvas.addEventListener('mouseup', mouseUp, false);#}
+{#    canvas.addEventListener('mousemove', mouseMove, false);#}
+{#}#}
+{##}
+{#function mouseDown(e) {#}
+{#    rect.startX = e.pageX - this.offsetLeft;#}
+{#    rect.startY = e.pageY - this.offsetTop;#}
+{#    drag = true;#}
+{#}#}
+{##}
+{#function mouseUp() { drag = false; }#}
+{##}
+{#function mouseMove(e) {#}
+{#    if (drag) {#}
+{#        ctx.clearRect(0, 0, 500, 500);#}
+{#        ctx.drawImage(imageObj, 0, 0);#}
+{#        rect.w = (e.pageX - this.offsetLeft) - rect.startX;#}
+{#        rect.h = (e.pageY - this.offsetTop) - rect.startY;#}
+{#        ctx.strokeStyle = 'red';#}
+{#        ctx.strokeRect(rect.startX, rect.startY, rect.w, rect.h);#}
+{#    }#}
+{#}#}
+{#//#}
+{#init();#}
+
+</script>
+<script type="text/javascript">
+  //Canvas
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+//Variables
+var canvasx = $(canvas).offset().left;
+var canvasy = $(canvas).offset().top;
+var last_mousex = last_mousey = 0;
+var mousex = mousey = 0;
+var mousedown = false;
+
+//Mousedown
+$(canvas).on('mousedown', function(e) {
+    last_mousex = parseInt(e.clientX-canvasx);
+  last_mousey = parseInt(e.clientY-canvasy);
+    mousedown = true;
+});
+
+//Mouseup
+$(canvas).on('mouseup', function(e) {
+    mousedown = false;
+});
+
+//Mousemove
+$(canvas).on('mousemove', function(e) {
+    mousex = parseInt(e.clientX-canvasx);
+  mousey = parseInt(e.clientY-canvasy);
+    if(mousedown) {
+        ctx.clearRect(0,0,canvas.width,canvas.height); //clear canvas
+        ctx.beginPath();
+        var width = mousex-last_mousex;
+        var height = mousey-last_mousey;
+        ctx.rect(last_mousex,last_mousey,width,height);
+        ctx.strokeStyle = 'black';
+        ctx.lineWidth = 6;
+        ctx.stroke();
+    }
+    //Output
+    $('#output').html('current: '+mousex+', '+mousey+'<br/>last: '+last_mousex+', '+last_mousey+'<br/>mousedown: '+mousedown);
+});
+
+</script>
+</html>
